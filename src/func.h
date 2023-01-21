@@ -5,20 +5,31 @@
 
 #include <vector>
 #include <set>
+#include <string>
 
 using std::vector;
 using std::set;
+using std::string;
 
-vector<int> inputCards();
-// Returns vector with integer elements from 1-13 resembling face cards.
+vector<double> inputCards();
+// Returns vector of elements in range 1-13 resembling card numbers.
 
-vector<int> generateRandomCards();
+vector<double> generateRandomCards();
 // Returns vector with randomly generated hand of 4 cards (1-13). 
 
-void printCards(vector<int> cards);
+void printCards(vector<double> cards);
 // Outputs all cards in a vector.
 
-set<vector<int>> permuteCards(vector<int> &cards, int l, int r);
+set<vector<double>> permuteCards(vector<double> &cards, int l, int r);
 // Generate all possible permutations of a card vector.
+
+vector<string> getSolutions(vector<double> cards);
+// Get all possible arithmetic equations from a given card vector.
+
+vector<string> solve24(set<vector<double>> permCards);
+// Solve the 24 Game from a set of permutated cards.
+
+void printSolutions(vector<string> solutions);
+// Print all solutions
 
 #endif

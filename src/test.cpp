@@ -4,18 +4,26 @@
 using namespace std;
 
 int main() {
-    vector<int> v = {1,2,3,4};
+    vector<double> v = {6,6,6,6};
 
-    auto perm = permuteCards(v, 0, v.size()-1);
+    // auto perm = permuteCards(v, 0, v.size()-1);
 
-    // for (int i = 0; i < perm.size(); i++) {
-    //     for (int j = 0; j < perm[i].size(); j++) {
-    //         cout << perm[i][j] << " ";
+    // // All card permutations
+    // for (auto it = perm.begin(); it != perm.end(); it++) {
+    //     auto permVector = *it;
+    //     for (int j = 0; j < permVector.size(); j++) {
+    //         cout << permVector[j] << " ";
     //     }
     //     cout << endl;
     // }
 
-    cout << endl << perm.size() << endl;
+    // cout << endl << perm.size() << endl;
+
+    vector<string> sols = getSolutions(v);
+
+    for (string sol: sols) {
+        cout << sol << endl;
+    }
 
     return 0;
 }

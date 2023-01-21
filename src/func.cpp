@@ -5,6 +5,7 @@
 #include <sstream>
 #include <ctime>
 #include <set>
+#include <cmath>
 #include "func.h"
 
 using std::vector;
@@ -16,12 +17,14 @@ using std::cout;
 using std::endl;
 using std::set;
 using std::swap;
+using std::fabs;
+using std::to_string;
 
-vector<int> inputCards() {
+vector<double> inputCards() {
     string input;
     cout << "Enter 4 face cards separated by spaces: ";
     getline(cin, input);
-    vector<int> output = {};
+    vector<double> output = {};
     string token;
     stringstream ss(input);
 
@@ -40,7 +43,7 @@ vector<int> inputCards() {
                 if (c < '0' || c > '9') {
                     // Error
                     cout << "Invalid input, only numbers 2-10 or J, Q, K, A are allowed.\n" << endl;
-                    return vector<int>();
+                    return vector<double>();
                 } else {
                     value = value * 10 + (c - '0');
                 }
@@ -49,7 +52,7 @@ vector<int> inputCards() {
             if (value < 2 || value > 10) {
                 // Error
                 cout << "Invalid input, only numbers 2-10 or J, Q, K, A are allowed.\n" << endl;
-                return vector<int>();
+                return vector<double>();
             } else {
                 output.push_back(value);
             }
@@ -60,14 +63,14 @@ vector<int> inputCards() {
     if (output.size() != 4) {
         // Error
         cout << "Invalid input, please enter 4 valid face cards.\n" << endl;
-        return vector<int>();
+        return vector<double>();
     }
 
     return output;
 }
 
-vector<int> generateRandomCards() {
-    vector<int> output;
+vector<double> generateRandomCards() {
+    vector<double> output;
     srand(time(0));
 
     for (int i = 0; i < 4; i++) {
@@ -78,7 +81,7 @@ vector<int> generateRandomCards() {
     return output;
 }
 
-void printCards(vector<int> cards) {
+void printCards(vector<double> cards) {
     for (int i = 0; i < cards.size(); i++) {
         if (cards[i] == 1) {
             cout << "A ";
@@ -89,14 +92,14 @@ void printCards(vector<int> cards) {
         } else if (cards[i] == 13) {
             cout << "K ";
         } else {
-            cout << cards[i] << " ";
+            cout << (int) cards[i] << " ";
         }
     }
     cout << endl;
 }
 
-set<vector<int>> permuteCards(vector<int> &cards, int l, int r) {
-    set<vector<int>> permutations;
+set<vector<double>> permuteCards(vector<double> &cards, int l, int r) {
+    set<vector<double>> permutations;
 
     if (l == r) {
         permutations.insert(cards);
@@ -109,5 +112,84 @@ set<vector<int>> permuteCards(vector<int> &cards, int l, int r) {
         }
     }
 
+    // Note to self: make your own 'swap' function
+
     return permutations;
+}
+
+
+double eval(double num1, char op, double num2) {
+    if (op == '+') {
+        return num1 + num2;
+    } else if (op == '-') {
+        return num1 - num2;
+    } else if (op == '*') {
+        return num1 * num2;
+    } else if (op == '/') {
+        return num1 / num2;
+    }
+}
+
+vector<string> getSolutions(vector<double> cards) {
+    vector<string> solutions = {};
+    string equation;
+
+    vector<char> ops = {'+', '-', '*', '/'};
+
+    for (int i = 0; i < ops.size(); i++) {
+        for (int j = 0; j < ops.size(); j++) {
+            for (int k = 0; k < ops.size(); k++) {
+                // Parentheses style 1: ((num1 op1 num2) op2 num3) op3 num 4
+                if (fabs(eval(eval(eval(cards[0], ops[i], cards[1]), ops[j], cards[2]), ops[k], cards[3]) - 24.0) < 1e-8) {
+                    equation = "((" + to_string((int) cards[0]) + " " + ops[i] + " " + to_string((int) cards[1]) + ") " + ops[j] + " " + to_string((int) cards[2]) + ") " + ops[k] + " " + to_string((int) cards[3]);
+                    solutions.push_back(equation);
+                }
+
+                // Parentheses style 2: (num1 op1 (num2 op2 num3)) op3 num4
+                if (fabs(eval(eval(cards[0], ops[i], eval(cards[1], ops[j], cards[2])), ops[k], cards[3]) - 24.0) < 1e-8) {
+                    equation = "(" + to_string((int) cards[0]) + " " + ops[i] + " " + "(" + to_string((int) cards[2]) + " " + ops[j] + " " + to_string((int) cards[3]) + "))" + " " + ops[k] + " " + to_string((int) cards[3]);
+                    solutions.push_back(equation);
+                }
+
+                // Parentheses style 3: (num1 op1 num2) op2 (num3 op3 num4)
+                if (fabs(eval(eval(cards[0], ops[i], cards[1]), ops[j], eval(cards[2], ops[k], cards[3])) - 24.0) < 1e-8) {
+                    equation = "((" + to_string((int) cards[0]) + " " + ops[i] + " " + to_string((int) cards[1]) + ") " + ops[j] + " (" + to_string((int) cards[2]) + " " + ops[k] + " " + to_string((int) cards[3]) + "))";
+                    solutions.push_back(equation);
+                }
+
+                // Parentheses style 4: num1 op1 ((num2 op2 num3) op3 num4)
+                if (fabs(eval(cards[0], ops[i], eval(eval(cards[1], ops[j], cards[2]), ops[k], cards[3])) - 24.0) < 1e-8) {
+                    equation = to_string((int) cards[0]) + " " + ops[i] + " ((" + to_string((int) cards[1]) + " " + ops[j] + " " + to_string((int) cards[2]) + ") " + ops[k] + " " + to_string((int) + cards[3]) + ")";
+                    solutions.push_back(equation);
+                }
+
+                // Parentheses style 5: num1 op1 (num2 op2 (num3 op3 num4))
+                if (fabs(eval(cards[0], ops[i], eval(cards[1], ops[j], eval(cards[2], ops[k], cards[3]))) - 24.0) < 1e-8) {
+                    equation = to_string((int) cards[0]) + " " + ops[i] + " (" + to_string((int) cards[1]) + " " + ops[j] + " (" + to_string((int) cards[2]) + " " + ops[k] + " " + to_string((int) cards[3]) + "))";
+                    solutions.push_back(equation);
+                }
+            }
+        }
+    }
+
+    return solutions;
+}
+
+vector<string> solve24(set<vector<double>> permCards) {
+    vector<string> solutions;
+    vector<string> permSols;
+
+    for (auto it = permCards.begin(); it != permCards.end(); it++) {
+        auto permVector = *it;
+        permSols = getSolutions(permVector);
+        solutions.insert(solutions.end(), permSols.begin(), permSols.end());
+    }
+
+    return solutions;
+}
+
+void printSolutions(vector<string> solutions) {
+    for (int i = 0; i < solutions.size(); i++) {
+        cout << (i+1) << ". " << solutions[i] << endl;
+    }
 }
