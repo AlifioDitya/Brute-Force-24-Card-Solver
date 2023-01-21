@@ -20,6 +20,9 @@ vector<double> generateRandomCards();
 void printCards(vector<double> cards);
 // Outputs all cards in a vector.
 
+void swapDoubles(double &a, double &b);
+// Swap values between two double typed variables.
+
 set<vector<double>> permuteCards(vector<double> &cards, int l, int r);
 // Generate all possible permutations of a card vector.
 

@@ -1,3 +1,5 @@
+// Main program
+
 #include <iostream>
 #include <limits>
 #include <chrono>

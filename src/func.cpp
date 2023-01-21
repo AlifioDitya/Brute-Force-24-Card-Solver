@@ -1,4 +1,5 @@
 // Helper functions definitions
+
 #include <iostream>
 #include <sstream>
 #include <ctime>
@@ -25,6 +26,7 @@ vector<double> inputCards() {
     string token;
     stringstream ss(input);
 
+    // Process input stream as tokenized strings separated by spaces
     while (ss >> token) {
         if (token == "A") {
             output.push_back(1);
@@ -38,7 +40,7 @@ vector<double> inputCards() {
             int value = 0;
             for (char c : token) {
                 if (c < '0' || c > '9') {
-                    // Error
+                    // Invalid character involved
                     cout << "Invalid input, only numbers 2-10 or J, Q, K, A are allowed.\n" << endl;
                     return vector<double>();
                 } else {
@@ -47,7 +49,7 @@ vector<double> inputCards() {
             }
 
             if (value < 2 || value > 10) {
-                // Error
+                // Invalid character/number involved
                 cout << "Invalid input, only numbers 2-10 or J, Q, K, A are allowed.\n" << endl;
                 return vector<double>();
             } else {
@@ -58,8 +60,8 @@ vector<double> inputCards() {
     }
 
     if (output.size() != 4) {
-        // Error
-        cout << "Invalid input, please enter 4 valid face cards.\n" << endl;
+        // Invalid card size or input format
+        cout << "Invalid input, please enter 4 valid face cards separated by spaces.\n" << endl;
         return vector<double>();
     }
 
@@ -68,8 +70,9 @@ vector<double> inputCards() {
 
 vector<double> generateRandomCards() {
     vector<double> output;
-    srand(time(0));
 
+    // Generate random seed using current time
+    srand(time(0));
     for (int i = 0; i < 4; i++) {
         int randCard = rand() % 13 + 1;
         output.push_back(randCard);
@@ -79,6 +82,7 @@ vector<double> generateRandomCards() {
 }
 
 void printCards(vector<double> cards) {
+    // Iterate through vector to output all cards
     for (int i = 0; i < cards.size(); i++) {
         if (cards[i] == 1) {
             cout << "A ";
@@ -96,17 +100,21 @@ void printCards(vector<double> cards) {
 }
 
 void swapDoubles(double &a, double &b) {
+    // Swap between doubles
     double temp = a;
     a = b;
     b = temp;
 }
 
 set<vector<double>> permuteCards(vector<double> &cards, int l, int r) {
+    // Permutations saved in a set of vectors
     set<vector<double>> permutations;
 
+    // Base case: Last element of vector reached, save permutated cards
     if (l == r) {
         permutations.insert(cards);
     } else {
+    // Recursion: Permute sub sections of cards
         for (int i = l; i <= r; i++) {
             swapDoubles(cards[l], cards[i]);
             auto subPerm = permuteCards(cards, l + 1, r);
@@ -120,6 +128,7 @@ set<vector<double>> permuteCards(vector<double> &cards, int l, int r) {
 
 
 double eval(double num1, char op, double num2) {
+    // Evaluate operations
     if (op == '+') {
         return num1 + num2;
     } else if (op == '-') {
@@ -127,6 +136,7 @@ double eval(double num1, char op, double num2) {
     } else if (op == '*') {
         return num1 * num2;
     } else if (op == '/') {
+        // Note: Zero division of doubles results in `inf`
         return num1 / num2;
     }
 }
@@ -137,6 +147,7 @@ vector<string> getSolutions(vector<double> cards) {
 
     vector<char> ops = {'+', '-', '*', '/'};
 
+    // Iterate through all permutation of operations
     for (int i = 0; i < ops.size(); i++) {
         for (int j = 0; j < ops.size(); j++) {
             for (int k = 0; k < ops.size(); k++) {
@@ -180,6 +191,7 @@ vector<string> solve24(set<vector<double>> permCards) {
     vector<string> solutions;
     vector<string> permSols;
 
+    // Sequentially iterate through a set of permutated cards
     for (auto it = permCards.begin(); it != permCards.end(); it++) {
         auto permVector = *it;
         permSols = getSolutions(permVector);
@@ -190,6 +202,7 @@ vector<string> solve24(set<vector<double>> permCards) {
 }
 
 void printSolutions(vector<string> solutions) {
+    // Outputs solution vector
     for (int i = 0; i < solutions.size(); i++) {
         cout << (i+1) << ". " << solutions[i] << endl;
     }
