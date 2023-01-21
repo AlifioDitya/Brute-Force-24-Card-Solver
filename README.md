@@ -1,0 +1,3 @@
+# Tugas Kecil Strategi Algoritma 1
+## Solver Game 24 dengan *Brute Force Algorithm*
+Tugas kecil ini berisi program yang menyelesaikan permainan kartu 24. Permainan kartu 24 adalah permainan kartu aritmatika dengan tujuan mencari cara untuk mengoperasikan empat buah angka satuan sembarang sehingga mendapatkan hasil akhir sejumlah 24. Keluaran dari program ini adalah menampilkan seluruh kemungkinan persamaan matematika antara empat bilangan bulat satuan yang menghasilkan 24. Pendekatan yang digunakan dalam mendesain algoritma ini adalah dengan strategi *Brute Force*, yakni dengan mencoba seluruh kemungkinan permutasi operasi antar empat bilangan.
