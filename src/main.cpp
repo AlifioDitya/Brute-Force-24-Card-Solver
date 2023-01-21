@@ -6,6 +6,8 @@ using std::cout;
 using std::endl;
 using std::numeric_limits;
 using std::streamsize;
+using std::string;
+using std::getline;
 
 int main() {
 
@@ -21,6 +23,8 @@ int main() {
         cout << "Option: ";
 
         cin >> option;
+
+        cout << endl;
 
         if (cin.fail() || (option != 1 && option != 2)) {
             cout << "Invalid option, please pick either 1 or 2.\n" << endl;
@@ -38,10 +42,28 @@ int main() {
         }
     } else {
         cards = generateRandomCards();
-        cout << "Your cards are:" << endl;
-        printCards(cards);
-        cout << endl;
     }
     
+    cout << "Your cards are:" << endl;
+    printCards(cards);
+    cout << endl;
+
+    string blank;
+    cout << "Click enter to see solutions." << endl;
+    getline(cin, blank);
+
+    auto perm = permuteCards(cards, 0, cards.size()-1);
+
+    // All card permutations
+    for (auto it = perm.begin(); it != perm.end(); it++) {
+        auto permVector = *it;
+        for (int j = 0; j < permVector.size(); j++) {
+            cout << permVector[j] << " ";
+        }
+        cout << endl;
+    }
+
+    cout << endl << perm.size() << endl;
+
     return 0;
 }

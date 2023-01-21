@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <ctime>
+#include <set>
 #include "func.h"
 
 using std::vector;
@@ -13,6 +14,8 @@ using std::getline;
 using std::cin;
 using std::cout;
 using std::endl;
+using std::set;
+using std::swap;
 
 vector<int> inputCards() {
     string input;
@@ -90,4 +93,21 @@ void printCards(vector<int> cards) {
         }
     }
     cout << endl;
+}
+
+set<vector<int>> permuteCards(vector<int> &cards, int l, int r) {
+    set<vector<int>> permutations;
+
+    if (l == r) {
+        permutations.insert(cards);
+    } else {
+        for (int i = l; i <= r; i++) {
+            swap(cards[l], cards[i]);
+            auto subPerm = permuteCards(cards, l + 1, r);
+            permutations.insert(subPerm.begin(), subPerm.end());
+            swap(cards[l], cards[i]);
+        }
+    }
+
+    return permutations;
 }
