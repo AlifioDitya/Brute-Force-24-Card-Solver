@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <ctime>
 #include "func.h"
 
 using std::vector;
@@ -17,7 +18,7 @@ vector<int> inputCards() {
     string input;
     cout << "Enter 4 face cards separated by spaces: ";
     getline(cin, input);
-    vector<int> output;
+    vector<int> output = {};
     string token;
     stringstream ss(input);
 
@@ -44,7 +45,7 @@ vector<int> inputCards() {
 
             if (value < 2 || value > 10) {
                 // Error
-                cout << "Invalid input, only numbers 2-10 or J, Q, K, A are allowed.\n" << value << endl;
+                cout << "Invalid input, only numbers 2-10 or J, Q, K, A are allowed.\n" << endl;
                 return vector<int>();
             } else {
                 output.push_back(value);
@@ -59,9 +60,34 @@ vector<int> inputCards() {
         return vector<int>();
     }
 
-    /* Note for self : Pengguna dapat memilih apakah program 
-    meminta input dari pengguna atau generate sendiri. */
-
     return output;
 }
 
+vector<int> generateRandomCards() {
+    vector<int> output;
+    srand(time(0));
+
+    for (int i = 0; i < 4; i++) {
+        int randCard = rand() % 13 + 1;
+        output.push_back(randCard);
+    }
+    
+    return output;
+}
+
+void printCards(vector<int> cards) {
+    for (int i = 0; i < cards.size(); i++) {
+        if (cards[i] == 1) {
+            cout << "A ";
+        } else if (cards[i] == 11) {
+            cout << "J ";
+        } else if (cards[i] == 12) {
+            cout << "Q ";
+        } else if (cards[i] == 13) {
+            cout << "K ";
+        } else {
+            cout << cards[i] << " ";
+        }
+    }
+    cout << endl;
+}
