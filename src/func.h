@@ -30,6 +30,6 @@ vector<string> solve24(set<vector<double>> permCards);
 // Solve the 24 Game from a set of permutated cards.
 
 void printSolutions(vector<string> solutions);
-// Print all solutions
+// Print all solutions.
 
 #endif

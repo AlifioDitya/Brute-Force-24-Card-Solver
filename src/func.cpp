@@ -1,7 +1,5 @@
 // Helper functions definitions
 #include <iostream>
-#include <vector>
-#include <string>
 #include <sstream>
 #include <ctime>
 #include <set>
@@ -16,7 +14,6 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::set;
-using std::swap;
 using std::fabs;
 using std::to_string;
 
@@ -98,6 +95,12 @@ void printCards(vector<double> cards) {
     cout << endl;
 }
 
+void swapDoubles(double &a, double &b) {
+    double temp = a;
+    a = b;
+    b = temp;
+}
+
 set<vector<double>> permuteCards(vector<double> &cards, int l, int r) {
     set<vector<double>> permutations;
 
@@ -105,14 +108,12 @@ set<vector<double>> permuteCards(vector<double> &cards, int l, int r) {
         permutations.insert(cards);
     } else {
         for (int i = l; i <= r; i++) {
-            swap(cards[l], cards[i]);
+            swapDoubles(cards[l], cards[i]);
             auto subPerm = permuteCards(cards, l + 1, r);
             permutations.insert(subPerm.begin(), subPerm.end());
-            swap(cards[l], cards[i]);
+            swapDoubles(cards[l], cards[i]);
         }
     }
-
-    // Note to self: make your own 'swap' function
 
     return permutations;
 }
