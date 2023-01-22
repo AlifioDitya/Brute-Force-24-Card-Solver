@@ -1,3 +1,49 @@
-# Tugas Kecil Strategi Algoritma 1
-## Solver Game 24 dengan *Brute Force Algorithm*
-Tugas kecil ini berisi program yang menyelesaikan permainan kartu 24. Permainan kartu 24 adalah permainan kartu aritmatika dengan tujuan mencari cara untuk mengoperasikan empat buah angka satuan sembarang sehingga mendapatkan hasil akhir sejumlah 24. Keluaran dari program ini adalah menampilkan seluruh kemungkinan persamaan matematika antara empat bilangan bulat satuan yang menghasilkan 24. Pendekatan yang digunakan dalam mendesain algoritma ini adalah dengan strategi *Brute Force*, yakni dengan mencoba seluruh kemungkinan permutasi operasi antar empat bilangan.
+# IF2211 Algorithm Strategies Course Project
+## 24 Game Solver with Brute Force Algorithm
+This project is a program that solves the 24 Game, a mathematical puzzle in which the objective is to find a way to manipulate four integers so that the end result is 24. The program uses a brute force approach, starting by taking four integers as inputs, generates all possible permutations of the integers, and then finding combinations of all possible sets of mathematical operations to find a solution for each permutation. The program also includes functionality for saving solutions to a text file and for outputting solutions in a human-readable format.
+
+## Getting Started
+### Prerequisites
+- A C++ compiler (such as G++ or Clang)
+- The C++ Standard Template Library (STL)
+
+### Installing
+*Alternative 1*
+1. Clone the repository to your local machine
+``` bash
+$ git clone https://github.com/AlifioDitya/Tucil1_13521142.git
+```
+2. Change directory to `src` folder
+``` bash
+$ cd src
+```
+3. Compile the program
+``` bash
+$ g++ main.cpp func.cpp -o main.exe
+```
+4. Run the program
+``` bash
+$ ./main.exe
+```
+*Alternative 2*
+1. Clone the repository to your local machine
+``` bash
+$ git clone https://github.com/AlifioDitya/Tucil1_13521142.git
+```
+2. Change directory to `bin` folder
+``` bash
+$ cd bin
+```
+3. Run executable file
+``` bash
+$ ./main.exe
+```
+
+### Usage
+When the program is run, it will prompt the user to enter four integers. The program will then generate all possible permutations of these integers and use a set of mathematical operations to find a solution for each permutation. The program will output all solutions in a human-readable format and also offers an option to save the solutions to a text file.
+
+## Author
+Enrique Alifio Ditya / 13521142
+
+## Made with
+![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
