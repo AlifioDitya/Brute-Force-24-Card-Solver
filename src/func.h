@@ -35,7 +35,10 @@ vector<string> solve24(set<vector<double>> permCards);
 void printSolutions(vector<string> solutions);
 // Print all solutions.
 
-void saveVectorToFile(const vector<string> &vec, const string &fileName);
+string stringifyCardVector(vector<double> vec);
+// Create a string from a vector of cards.
+
+void saveVectorToFile(const vector<string> &vec, const string &fileName, const string cards);
 // Save the contents of a vector of strings inside a text file.
 
 #endif

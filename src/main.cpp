@@ -11,6 +11,7 @@ using std::endl;
 using std::numeric_limits;
 using std::streamsize;
 using std::string;
+using std::to_string;
 using std::getline;
 
 int main() {
@@ -99,11 +100,11 @@ int main() {
 
                 if (saveOpt == 'y') {
                     // Note: ".txt" extension has to be entered in order to save as a text file
-                    string filename;
+                    string filename = "";
                     cout << "Enter save file name: ";
                     cin >> filename;
                     cout << endl;
-                    saveVectorToFile(solution, filename);
+                    saveVectorToFile(solution, filename, stringifyCardVector(cards));
                     cout << "Solution saved in " << filename << endl << endl;
                 }
             } while (saveOpt != 'y' && saveOpt != 'n');

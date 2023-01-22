@@ -167,7 +167,7 @@ vector<string> getSolutions(vector<double> cards) {
 
                 // Parentheses style 3: (num1 op1 num2) op2 (num3 op3 num4)
                 if (fabs(eval(eval(cards[0], ops[i], cards[1]), ops[j], eval(cards[2], ops[k], cards[3])) - 24.0) < 1e-8) {
-                    equation = "((" + to_string((int) cards[0]) + " " + ops[i] + " " + to_string((int) cards[1]) + ") " + ops[j] + " (" + to_string((int) cards[2]) + " " + ops[k] + " " + to_string((int) cards[3]) + "))";
+                    equation = "(" + to_string((int) cards[0]) + " " + ops[i] + " " + to_string((int) cards[1]) + ") " + ops[j] + " (" + to_string((int) cards[2]) + " " + ops[k] + " " + to_string((int) cards[3]) + ")";
                     solutions.push_back(equation);
                 }
 
@@ -210,9 +210,30 @@ void printSolutions(vector<string> solutions) {
     }
 }
 
-void saveVectorToFile(const vector<string> &vec, const string &fileName) {
+string stringifyCardVector(vector<double> vec) {
+    string strVec = "";
+    for (int i = 0; i < vec.size(); i++) {
+        if ((int) vec[i] == 1) {
+            strVec += "A";
+        } else if ((int) vec[i] == 11) {
+            strVec += "J";
+        } else if ((int) vec[i] == 12) {
+            strVec += "Q";
+        } else if ((int) vec[i] == 13) {
+            strVec += "K";
+        } else {
+            strVec += to_string((int) vec[i]);
+        }
+        strVec += " ";
+    }
+
+    return strVec;
+}
+
+void saveVectorToFile(const vector<string> &vec, const string &fileName, const string cards) {
     ofstream outFile;
     outFile.open(fileName);
+    outFile << "Cards: " << cards << endl << endl;
     for (const auto &line : vec) {
         outFile << line << endl;
     }
