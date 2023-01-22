@@ -22,7 +22,7 @@ using std::ofstream;
 
 vector<double> inputCards() {
     string input;
-    cout << "Enter 4 face cards separated by spaces: ";
+    cout << "Enter 4 card faces separated by spaces: ";
     getline(cin, input);
     vector<double> output = {};
     string token;
@@ -81,24 +81,6 @@ vector<double> generateRandomCards() {
     }
     
     return output;
-}
-
-void printCards(vector<double> cards) {
-    // Iterate through vector to output all cards
-    for (int i = 0; i < cards.size(); i++) {
-        if (cards[i] == 1) {
-            cout << "A ";
-        } else if (cards[i] == 11) {
-            cout << "J ";
-        } else if (cards[i] == 12) {
-            cout << "Q ";
-        } else if (cards[i] == 13) {
-            cout << "K ";
-        } else {
-            cout << (int) cards[i] << " ";
-        }
-    }
-    cout << endl;
 }
 
 void swapDoubles(double &a, double &b) {
@@ -201,6 +183,24 @@ vector<string> solve24(set<vector<double>> permCards) {
     }
 
     return solutions;
+}
+
+void printCards(vector<double> cards) {
+    // Iterate through vector to output all cards
+    for (int i = 0; i < cards.size(); i++) {
+        if (cards[i] == 1) {
+            cout << "A ";
+        } else if (cards[i] == 11) {
+            cout << "J ";
+        } else if (cards[i] == 12) {
+            cout << "Q ";
+        } else if (cards[i] == 13) {
+            cout << "K ";
+        } else {
+            cout << (int) cards[i] << " ";
+        }
+    }
+    cout << endl;
 }
 
 void printSolutions(vector<string> solutions) {

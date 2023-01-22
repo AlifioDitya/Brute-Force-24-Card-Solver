@@ -17,9 +17,6 @@ vector<double> inputCards();
 vector<double> generateRandomCards();
 // Returns vector with randomly generated hand of 4 cards (1-13). 
 
-void printCards(vector<double> cards);
-// Outputs all cards in a vector.
-
 void swapDoubles(double &a, double &b);
 // Swap values between two double typed variables.
 
@@ -31,6 +28,9 @@ vector<string> getSolutions(vector<double> cards);
 
 vector<string> solve24(set<vector<double>> permCards);
 // Solve the 24 Game from a set of permutated cards.
+
+void printCards(vector<double> cards);
+// Outputs all cards in a vector.
 
 void printSolutions(vector<string> solutions);
 // Print all solutions.
