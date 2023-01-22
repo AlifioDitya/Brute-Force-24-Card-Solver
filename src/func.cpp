@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <ctime>
 #include <set>
 #include <cmath>
@@ -17,6 +18,7 @@ using std::endl;
 using std::set;
 using std::fabs;
 using std::to_string;
+using std::ofstream;
 
 vector<double> inputCards() {
     string input;
@@ -206,4 +208,13 @@ void printSolutions(vector<string> solutions) {
     for (int i = 0; i < solutions.size(); i++) {
         cout << (i+1) << ". " << solutions[i] << endl;
     }
+}
+
+void saveVectorToFile(const vector<string> &vec, const string &fileName) {
+    ofstream outFile;
+    outFile.open(fileName);
+    for (const auto &line : vec) {
+        outFile << line << endl;
+    }
+    outFile.close();
 }

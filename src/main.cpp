@@ -89,18 +89,38 @@ int main() {
 
         cout << "Runtime: " << duration.count() << "ms\n" << endl;
 
+        // Option to save the solutions
+        if (solution.size() != 0) {
+            char saveOpt;
+            do {
+                cout << "Would you like to save the solution? [y/n]\n\nOption: ";
+                cin >> saveOpt;
+                cout << endl;
+
+                if (saveOpt == 'y') {
+                    // Note: ".txt" extension has to be entered in order to save as a text file
+                    string filename;
+                    cout << "Enter save file name: ";
+                    cin >> filename;
+                    cout << endl;
+                    saveVectorToFile(solution, filename);
+                    cout << "Solution saved in " << filename << endl << endl;
+                }
+            } while (saveOpt != 'y' && saveOpt != 'n');
+        }
+
         // Option to re-run or terminate
-        char option2;
+        char rerun;
         do {
-            cout << "Would you like to try again? [y/n]\n\nOption: ";
-            cin >> option2;
+            cout << "Would you like to try the game again? [y/n]\n\nOption: ";
+            cin >> rerun;
             cout << endl;
 
-            if (option2 == 'n') {
+            if (rerun == 'n') {
                 running = false;
                 cout << "Goodbye!" << endl;
             }
-        } while (option2 != 'y' && option2 != 'n');
+        } while (rerun != 'y' && rerun != 'n');
     }
 
     return 0;
