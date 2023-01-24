@@ -1,6 +1,6 @@
 # IF2211 Algorithm Strategies Course Project
 ## 24 Game Solver with Brute Force Algorithm
-This project is a program that solves the 24 Game, a mathematical puzzle in which the objective is to find a way to manipulate four integers so that the end result is 24. The program uses a brute force approach, starting by taking four integers as inputs, generates all possible permutations of the integers, and then finding combinations of all possible sets of mathematical operations to find a solution for each permutation. The program also includes functionality for saving solutions to a text file and for outputting solutions in a human-readable format.
+This project is a program that solves the 24 Game, a mathematical puzzle in which the objective is to find a way to manipulate four integers representing card numbers with mathematical operations such that the end result is 24. The program uses a brute force approach, starting by taking four integers as inputs, then generating all possible permutations of the integers, and finally evaluating combinations of all possible sets of mathematical operations to find a solution for each permutation. The program also includes functionality for saving solutions to a text file and for outputting solutions in a human-readable format.
 
 ## Getting Started
 ### Prerequisites
@@ -40,10 +40,35 @@ $ ./main.exe
 ```
 
 ### Usage
-When the program is run, it will prompt the user to enter four integers. The program will then generate all possible permutations of these integers and use a set of mathematical operations to find a solution for each permutation. The program will output all solutions in a human-readable format and also offers an option to save the solutions to a text file.
+When the program is run, it will prompt the user to enter four integers. The program will then generate all possible permutations of these integers and use a set of mathematical operations to find a solution for each permutation. The program will output all solutions and execution time in a human-readable format and also offers an option to save the solutions to a text file.
+
+## Repository Structure
+```
+│ .gitignore
+│ README.md
+├─── bin
+│       │ main.exe
+│
+├─── doc
+│       │ Tucil1_K2_13521142_Enrique Alifio Ditya_Revisi2.pdf
+│
+├─── src
+│       │ func.h
+│       │ func.cpp
+│       │ main.cpp
+│
+├─── test
+        │ test1.txt
+        │ test2.txt
+        │ test3.txt
+        │ test4.txt
+        │ test5.txt
+        │ test6.txt
+        │ test7.txt
+```
 
 ## Author
-Enrique Alifio Ditya / 13521142
+[Enrique Alifio Ditya / 13521142](https://github.com/AlifioDitya)
 
 ## Made with
 ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
