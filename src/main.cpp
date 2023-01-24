@@ -74,6 +74,10 @@ int main() {
         // Get solutions in vector of strings
         vector<string> solution = solve24(perm);
 
+        // End clock
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
         if (solution.size() != 0) {
             // Solutions found
             cout << "Solutions to 24:" << endl;
@@ -83,12 +87,8 @@ int main() {
             // No solutions
             cout << "No solutions found for the given card hand.\n" << endl;
         }
-
-        // End clock
-        auto end = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-
-        cout << "Runtime: " << duration.count() << "ms\n" << endl;
+        
+        cout << "Execution time: " << duration.count() * (1e-3) << "ms\n" << endl;
 
         // Option to save the solutions
         if (solution.size() != 0) {
